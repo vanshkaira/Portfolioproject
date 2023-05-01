@@ -2,17 +2,19 @@ SELECT *
 FROM [Portfolio project].dbo.CovidDeaths
 ORDER BY 1,2
 
+---Total cases vs total death
 SELECT location, total_cases, total_deaths, date,population,new_cases,(total_cases/population)*100 as Covidinfected
 FROM .dbo.CovidDeaths
 WHERE location like '%INDIA%'
 ORDER BY 1,2
 
-
+--countries with high population rate compared to population
 SELECT location,MAX(total_cases) as HighestInfectedcount,population,MAX(total_cases/population)*100 as PERCENTAGEPEOPLEINFECTED
 FROM [Portfolio project].dbo.CovidDeaths
 Group By location,Population
 ORDER BY PERCENTAGEPEOPLEINFECTED DESC
 
+--Countries with highest daeth count  per population
 Select Location, Max(Cast(total_deaths as int)) as totaldeathcount
 From [Portfolio project]. .CovidDeaths
 where continent is not null
